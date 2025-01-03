@@ -27,14 +27,12 @@ pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
 
 def generate_tone(frequency, duration, volume=1):
     """
-    توليد موجة صوتية بتردد معين ومدة.
-    
-    :param frequency: التردد (هرتز)
-    :param duration: المدة (ثوانٍ)
-    :param volume: مستوى الصوت (0.0 إلى 1.0)
+    :param frequency: hz
+    :param duration:(s)
+    :param volume: sound volume (0.0-->1.0)
     :return: None
     """
-    sample_rate = 44100  # عدد العينات في الثانية
+    sample_rate = 44100  
     num_samples = int(sample_rate * duration)
     t = np.linspace(0, duration, num_samples, False)
     wave = np.sin(2 * np.pi * frequency * t)
@@ -47,9 +45,9 @@ def generate_tone(frequency, duration, volume=1):
 def play_notes(note_sequence, duration=0.5, volume=1):
     """
     
-    :param note_sequence: نص يحتوي على النغمات (exp "A B C# F")
-    :param duration: مدة كل نغمة (ثوانٍ)
-    :param volume: مستوى الصوت (0.0 إلى 1.0)
+    :param note_sequence: (exp "A B C# F")
+    :param duration:(s)
+    :param volume:  (0.0 --> 1.0)
     :return: None
     """
     notes = note_sequence.split(" ")
@@ -59,7 +57,7 @@ def play_notes(note_sequence, duration=0.5, volume=1):
             frequency = NOTE_FREQUENCIES[normalized_note]
             generate_tone(frequency, duration, volume)
         else:
-            print(f"تحذير: النغمة '{note}' غير موجودة في القاموس.")
+            print(f"{note} not exist")
 
 while True:
     play_notes("""C4 D4 D#4 D#4 F4 G4 G#4 G#4 A4 C4 C4 C4 D4
